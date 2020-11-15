@@ -74,7 +74,7 @@ def loop(usbport):
     print("Starting reading dust sensor on port " + usbport + "...") 
     reader = SDS021Reader(usbport)
     i = 1 
-    while i<10:
+    while i<2:
         reader.read()
         i = i+1
 if len(sys.argv)==2:

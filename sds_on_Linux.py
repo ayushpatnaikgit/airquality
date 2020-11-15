@@ -10,14 +10,14 @@ import os
 import sys
 import time
 import serial
-os.system("sudo uhubctl -a on -l 2")
+os.system("sudo uhubctl/uhubctl -a on -l 2")
 
 # Reopen sys.stdout with buffer size 0 (unbuffered)
 sys.stdout = os.fdopen(sys.stdout.fileno(), 'w')
 
 # Set default USB port
 USBPORT = "/dev/ttyUSB0"
-
+time.sleep(3)
 
 class SDS021Reader:
 
@@ -74,12 +74,12 @@ def loop(usbport):
     pm25 = []
     pm10 = []
     i = 1 
-    while i<=100:
+    while i<=30:
         val = reader.read()
         pm10.append(val[0])
         pm25.append(val[1])
         i = i+1
-    return (sum(pm10)/100,sum(pm25)/100)
+    return (sum(pm10)/30,sum(pm25)/30)
 
 if len(sys.argv)==2:
     if sys.argv[1].startswith('/dev'):  # Valid are only parameters starting with /dev
@@ -88,4 +88,4 @@ if len(sys.argv)==2:
         loop(USBPORT)
 else:
     loop(USBPORT)
-os.system("sudo uhubctl -a off -l 2")
+os.system("sudo uhubctl/uhubctl -a off -l 2")

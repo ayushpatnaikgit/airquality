@@ -26,7 +26,8 @@ class SDS021Reader:
 
     def readValue( self ):
         step = 0
-        while True: 
+        i =1
+        while i<10: 
             while self.serial.inWaiting() != 0:
                 v = ord(self.serial.read())
 
@@ -51,7 +52,7 @@ class SDS021Reader:
                 elif step >= 2:
                     values[step - 2] = v
                     step = step + 1
-
+            i = i+!
 
     def read( self ):
         species = [[],[]]

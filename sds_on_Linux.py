@@ -56,7 +56,7 @@ class SDS021Reader:
     def read( self ):
         species = [[],[]]
 
-        while 1:
+        while i<10:
             try:
                 values = self.readValue()
                 species[0].append(values[0])
@@ -69,7 +69,7 @@ class SDS021Reader:
             except:
                 e = sys.exc_info()[0]
                 print("Can not read sensor data! Error description: " + str(e))
-
+            i = i+1
 def loop(usbport):
     print("Starting reading dust sensor on port " + usbport + "...") 
     reader = SDS021Reader(usbport)

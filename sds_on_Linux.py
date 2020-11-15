@@ -81,7 +81,7 @@ def loop(usbport):
         pm25.append(val[1])
         i = i+1
     os.system("sudo uhubctl/uhubctl -a off -l 2") 
-   return (sum(pm10)/30,sum(pm25)/30)
+    return (sum(pm10)/30,sum(pm25)/30)
 
 #if len(sys.argv)==2:
 #    if sys.argv[1].startswith('/dev'):  # Valid are only parameters starting with /dev

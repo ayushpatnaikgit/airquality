@@ -70,17 +70,16 @@ class SDS021Reader:
                 print("Can not read sensor data! Error description: " + str(e))
             i = i+1
 def loop(usbport):
-    print("Starting reading dust sensor on port " + usbport + "...") 
     reader = SDS021Reader(usbport)
     pm25 = []
     pm10 = []
     i = 1 
-    while i<20:
+    while i<=100:
         val = reader.read()
         pm10.append(val[0])
         pm25.append(val[1])
         i = i+1
-    return sum(pm10/20,pm25/20)
+    return (sum(pm10)/100,sum(pm25)/100)
 
 if len(sys.argv)==2:
     if sys.argv[1].startswith('/dev'):  # Valid are only parameters starting with /dev

@@ -77,8 +77,8 @@ def loop(usbport):
     i = 1 
     while i<20:
         val = reader.read()
-        pm10.append(val[1])
-        pm25.append(val[2])
+        pm10.append(val[0])
+        pm25.append(val[1])
         i = i+1
     return sum(pm10/20,pm25/20)
 

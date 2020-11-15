@@ -10,7 +10,7 @@ import os
 import sys
 import time
 import serial
-os.system("sudo ./uhubctl -a on -l 2")
+os.system("sudo uhubctl -a on -l 2")
 
 # Reopen sys.stdout with buffer size 0 (unbuffered)
 sys.stdout = os.fdopen(sys.stdout.fileno(), 'w')
@@ -26,7 +26,6 @@ class SDS021Reader:
 
     def readValue( self ):
         step = 0
-        i =1
         while i<10: 
             while self.serial.inWaiting() != 0:
                 v = ord(self.serial.read())
@@ -52,7 +51,7 @@ class SDS021Reader:
                 elif step >= 2:
                     values[step - 2] = v
                     step = step + 1
-            i = i+1
+
 
     def read( self ):
         species = [[],[]]
@@ -85,4 +84,4 @@ if len(sys.argv)==2:
         loop(USBPORT)
 else:
     loop(USBPORT)
-os.system("sudo ./uhubctl -a off -l 2")
+os.system("sudo uhubctl -a off -l 2")

@@ -52,7 +52,7 @@ class SDS021Reader:
                 elif step >= 2:
                     values[step - 2] = v
                     step = step + 1
-            i = i+!
+            i = i+1
 
     def read( self ):
         species = [[],[]]

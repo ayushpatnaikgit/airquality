@@ -10,6 +10,7 @@ import os
 import sys
 import time
 import serial
+os.system("sudo ./uhubctl -a on -l 2")
 
 # Reopen sys.stdout with buffer size 0 (unbuffered)
 sys.stdout = os.fdopen(sys.stdout.fileno(), 'w')
@@ -71,10 +72,11 @@ class SDS021Reader:
 
 def loop(usbport):
     print("Starting reading dust sensor on port " + usbport + "...") 
-    reader = SDS021Reader(usbport) 
-    while 1:
+    reader = SDS021Reader(usbport)
+    i = 1 
+    while i<10:
         reader.read()
-
+        i = i+1
 if len(sys.argv)==2:
     if sys.argv[1].startswith('/dev'):  # Valid are only parameters starting with /dev
         loop(sys.argv[1])
@@ -82,3 +84,4 @@ if len(sys.argv)==2:
         loop(USBPORT)
 else:
     loop(USBPORT)
+os.system("sudo ./uhubctl -a off -l 2")

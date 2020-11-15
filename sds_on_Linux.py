@@ -55,7 +55,7 @@ class SDS021Reader:
 
     def read( self ):
         species = [[],[]]
-
+        i =1
         while i<10:
             try:
                 values = self.readValue()

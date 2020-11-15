@@ -61,8 +61,7 @@ class SDS021Reader:
                 values = self.readValue()
                 species[0].append(values[0])
                 species[1].append(values[1])
-                print("PM2.5: %.0f, PM10: %.0f" % (values[0], values[1]))
-                time.sleep(1)  # wait for one second
+                return(values[0], values[1])
             except KeyboardInterrupt:
                 print("Quit!")
                 sys.exit()
@@ -73,10 +72,16 @@ class SDS021Reader:
 def loop(usbport):
     print("Starting reading dust sensor on port " + usbport + "...") 
     reader = SDS021Reader(usbport)
+    pm25 = []
+    pm10 = []
     i = 1 
-    while i<2:
-        reader.read()
+    while i<20:
+        val = reader.read()
+        pm10.append(val[1])
+        pm25.append(val[2])
         i = i+1
+    return sum(pm10/20,pm25/20)
+
 if len(sys.argv)==2:
     if sys.argv[1].startswith('/dev'):  # Valid are only parameters starting with /dev
         loop(sys.argv[1])

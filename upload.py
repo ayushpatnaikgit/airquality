@@ -1,6 +1,6 @@
 import requests
 import sys
-from sds_on_Linux import *
+from SDSLinux import *
 AQI = loop(USBPORT)
 
 sensorReadings = [   

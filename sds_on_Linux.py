@@ -26,7 +26,7 @@ class SDS021Reader:
 
     def readValue( self ):
         step = 0
-        while i<10: 
+        while 1: 
             while self.serial.inWaiting() != 0:
                 v = ord(self.serial.read())
 

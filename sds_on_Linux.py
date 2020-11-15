@@ -10,7 +10,7 @@ import os
 import sys
 import time
 import serial
-os.system("sudo uhubctl/uhubctl -a on -l 2")
+#os.system("sudo uhubctl/uhubctl -a on -l 2")
 
 # Reopen sys.stdout with buffer size 0 (unbuffered)
 sys.stdout = os.fdopen(sys.stdout.fileno(), 'w')
@@ -70,6 +70,7 @@ class SDS021Reader:
                 print("Can not read sensor data! Error description: " + str(e))
             i = i+1
 def loop(usbport):
+    os.system("sudo uhubctl/uhubctl -a on -l 2")
     reader = SDS021Reader(usbport)
     pm25 = []
     pm10 = []
@@ -79,13 +80,14 @@ def loop(usbport):
         pm10.append(val[0])
         pm25.append(val[1])
         i = i+1
-    return (sum(pm10)/30,sum(pm25)/30)
+    os.system("sudo uhubctl/uhubctl -a off -l 2") 
+   return (sum(pm10)/30,sum(pm25)/30)
 
-if len(sys.argv)==2:
-    if sys.argv[1].startswith('/dev'):  # Valid are only parameters starting with /dev
-        loop(sys.argv[1])
-    else:
-        loop(USBPORT)
-else:
-    loop(USBPORT)
-os.system("sudo uhubctl/uhubctl -a off -l 2")
+#if len(sys.argv)==2:
+#    if sys.argv[1].startswith('/dev'):  # Valid are only parameters starting with /dev
+#        loop(sys.argv[1])
+#    else:
+#        loop(USBPORT)
+#else:
+#    loop(USBPORT)
+#	os.system("sudo uhubctl/uhubctl -a off -l 2")

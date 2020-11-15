@@ -70,7 +70,7 @@ class SDS021Reader:
             i = i+1
 def loop(usbport):
     os.system("sudo uhubctl/uhubctl -a on -l 2")
-    time.sleep(5) #booting
+    time.sleep(10) #booting
     reader = SDS021Reader(usbport)
     pm25 = []
     pm10 = []

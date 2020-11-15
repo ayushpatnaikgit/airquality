@@ -10,7 +10,6 @@ import os
 import sys
 import time
 import serial
-#os.system("sudo uhubctl/uhubctl -a on -l 2")
 
 # Reopen sys.stdout with buffer size 0 (unbuffered)
 sys.stdout = os.fdopen(sys.stdout.fileno(), 'w')
@@ -71,6 +70,7 @@ class SDS021Reader:
             i = i+1
 def loop(usbport):
     os.system("sudo uhubctl/uhubctl -a on -l 2")
+    time.sleep(5) #booting
     reader = SDS021Reader(usbport)
     pm25 = []
     pm10 = []

@@ -1,7 +1,12 @@
 import requests
 import sys
+import datetime
 from SDSLinux import *
 AQI = loop(USBPORT)
+sample = open('/home/data', 'a')
+
+print(str(datetime.datetime.now()) + " PM2.5: "+str(AQI[0])," PM10: "+str(AQI[1]), file = sample) 
+sample.close() 
 
 sensorReadings = [   
 
